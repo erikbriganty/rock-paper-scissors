@@ -4,77 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
+		<script src="script.js"></script>
 	</head>
-	<body>
-		<script>
-			const getPlayerChoice = (userChoice) => {
-				userChoice = userChoice.toLowerCase();
-				if (
-					userChoice === "rock" ||
-					userChoice === "paper" ||
-					userChoice === "scissor"
-				) {
-					return userChoice;
-				} else {
-					console.log("Invalid option.");
-				}
-			};
-			const computerPlay = () => {
-				let randomNumber = Math.floor(Math.random() * 3);
-				if (randomNumber === 0) {
-					return "scissor";
-				} else if (randomNumber === 1) {
-					return "rock";
-				} else if (randomNumber === 2) {
-					return "paper";
-				}
-			};
-			const playRound = (playerSelection, computerSelection) => {
-				playerSelection = playerSelection.toLowerCase();
-				if (playerSelection.toLowerCase() === computerSelection) {
-					return "This game is a tie";
-				}
-				if (playerSelection.toLowerCase() === "scissor") {
-					if (computerSelection === "rock") {
-						return "Computer wins!";
-					} else {
-						return "You win!";
-					}
-				}
-				if (playerSelection.toLowerCase() === "paper") {
-					if (computerSelection === "scissor") {
-						return "Computer wins!";
-					} else {
-						return "You win!";
-					}
-				}
-				if (playerSelection.toLowerCase() === "rock") {
-					if (computerSelection === "paper") {
-						return "Computer wins!";
-					} else {
-						return "You win!";
-					}
-				}
-			};
-			const game = () => {
-				for (let i = 0; i < 5; i++) {
-					let playerSelection = getPlayerChoice(
-						prompt("Choose between rock, paper, scissors")
-					);
-					if (playerSelection == null) {
-						alert("Invalid. Try again.");
-						i--;
-						continue;
-					}
-					const computerSelection = computerPlay();
-					console.log("You chose " + playerSelection.toLowerCase());
-					console.log("Computer chose " + computerSelection);
-					console.log(
-						playRound(playerSelection.toLowerCase(), computerSelection)
-					);
-				}
-			};
-			game();
-		</script>
-	</body>
+	<body></body>
 </html>
