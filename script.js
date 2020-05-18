@@ -1,103 +1,82 @@
 (function rockPaperOrScissors() {
-	let computerScore = 0;
-	let playerScore = 0;
-	let tie = 0;
+  let computerScore = 0;
+  let playerScore = 0;
+  let tie = 0;
+  const rock = document.getElementById("rock");
+  const paper = document.getElementById("paper");
+  const scissor = document.getElementById("scissor");
 
-	const getPlayerChoice = (userChoice) => {
-		const lowercaseChoice = userChoice.toLowerCase();
-		const options = ["rock", "paper", "scissor"];
-		if (options.includes(lowercaseChoice)) {
-			return userChoice;
-		} else {
-			console.log("Invalid option.");
-		}
-	};
+  rock.addEventListener("click", rockChoice);
+  paper.addEventListener("click", paperChoice);
+  scissor.addEventListener("click", scissorChoice);
 
-	const computerPlay = () => {
-		let randomNumber = Math.floor(Math.random() * 3);
+  function rockChoice() {
+    return playGame("rock", computerPlay());
+  }
+  function paperChoice() {
+    return playGame("paper", computerPlay());
+  }
+  function scissorChoice() {
+    return playGame("scissor", computerPlay());
+  }
 
-		if (randomNumber === 0) {
-			return "scissor";
-		} else if (randomNumber === 1) {
-			return "rock";
-		} else if (randomNumber === 2) {
-			return "paper";
-		}
-	};
+  function computerPlay() {
+    let options = ["rock", "paper", "scissor"];
+    let random = Math.floor(Math.random() * options.length);
+    return options[random];
+  }
 
-	const setComputerWinner = () => {
-		computerScore += 1;
-		const computerWinsText = `Computer wins!\nComputer: ${computerScore} Player: ${playerScore} Tie: ${tie}`;
-		return computerWinsText;
-	};
+  function compWon() {
+    const sayComp = document.getElementById("announce");
+    const compScore = document.getElementById("compScore");
+    computerScore += 1;
+    compScore.innerText = computerScore;
+    sayComp.innerText = `Computer wins!\nTie: ${tie}`;
+    return;
+  }
 
-	const setHumanWinner = () => {
-		playerScore += 1;
-		const humanWinsText = `You win!\nComputer: ${computerScore} Player: ${playerScore} Tie: ${tie}`;
-		return humanWinsText;
-	};
+  function playerWon() {
+    const sayPlayer = document.getElementById("announce");
+    const userScore = document.getElementById("userScore");
+    playerScore += 1;
+    userScore.innerText = playerScore;
+    sayPlayer.innerText = `You win!\nTie: ${tie}`;
+    return;
+  }
 
-	const setTie = () => {
-		tie += 1;
-		const tieText = `It's a tie.\nComputer: ${computerScore} Player: ${playerScore} Tie: ${tie}`;
-		return tieText;
-	};
+  function setTie() {
+    const sayTie = document.getElementById("announce");
+    tie += 1;
+    sayTie.innerText = `It's a tie.\nTie: ${tie}`;
+    return;
+  }
 
-	const playRound = (playerSelection, computerSelection) => {
-		const lowerCasePlayer = playerSelection.toLowerCase();
+  function gameOver() {
+    const endGame = document.getElementById("announce");
+    endGame.innerText = `Game Over!\nTie: ${tie}`;
+    rock.removeEventListener("click", rockChoice);
+    paper.removeEventListener("click", paperChoice);
+    scissor.removeEventListener("click", scissorChoice);
+    return;
+  }
 
-		if (lowerCasePlayer === computerSelection) {
-			return setTie();
-		}
+  let games = 0;
+  function playGame(playerSelection, computerSelection) {
+    if (games === 3) return gameOver();
 
-		if (lowerCasePlayer === "scissor") {
-			if (computerSelection === "rock") {
-				return setComputerWinner();
-			} else {
-				return setHumanWinner();
-			}
-		}
-
-		if (lowerCasePlayer === "paper") {
-			if (computerSelection === "scissor") {
-				return setComputerWinner();
-			} else {
-				return setHumanWinner();
-			}
-		}
-
-		if (lowerCasePlayer === "rock") {
-			if (computerSelection === "paper") {
-				return setComputerWinner();
-			} else {
-				return setHumanWinner();
-			}
-		}
-	};
-
-	const game = () => {
-		for (let i = 0; i < 5; ++i) {
-			let playerSelection = getPlayerChoice(
-				prompt("Choose between rock, paper, scissor")
-			);
-			if (playerSelection == null) {
-				alert("Invalid. Try again.");
-				--i;
-				continue;
-			}
-			const computerSelection = computerPlay();
-
-			console.log(`You chose: ${playerSelection.toLowerCase()}`);
-			console.log(`Computer chose: ${computerSelection}`);
-			console.log(playRound(playerSelection.toLowerCase(), computerSelection));
-		}
-		if (playerScore > computerScore) {
-			console.log("Game over.\nCongratulations! You beat the Computer!");
-		} else if (computerScore > playerScore) {
-			console.log("Game over.\nSorry! You lost.");
-		} else {
-			console.log("Game over.\nYou tied with the Computer.");
-		}
-	};
-	game();
+    if (
+      (playerSelection === "scissor" && computerSelection === "rock") ||
+      (playerSelection === "paper" && computerSelection === "scissor") ||
+      (playerSelection === "rock" && computerSelection === "paper")
+    ) {
+      ++games;
+      return compWon();
+    } else if (playerSelection == computerSelection) {
+      --games;
+      return setTie();
+    } else {
+      ++games;
+      return playerWon();
+    }
+  }
 })();
