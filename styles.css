@@ -1,24 +1,38 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
+}
+
 header {
   background-color: rgb(241, 244, 247);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   word-spacing: 0.5rem;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
-  padding: 1.4rem 0 1.4rem 0;
-  max-width: 100%;
+  padding: 1rem 0 1rem 0;
   border-bottom: 0.4rem solid black;
 }
 
-.names {
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+#p-header {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+body {
   background-color: rgb(223, 231, 240);
+}
+.names {
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2rem;
   padding: 3rem 0 1.4rem 0;
-  max-width: 100%;
 }
 
 .score {
@@ -26,37 +40,15 @@ header {
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.2rem;
-  padding: 1rem 0 1.4rem 0;
-  max-width: 100%;
-}
-
-#userScore {
-  margin-right: 8.4rem;
+  padding: 0 2rem 0 0;
 }
 
 .btn {
-  background-color: rgb(223, 231, 240);
   display: flex;
   justify-content: center;
   justify-content: space-evenly;
-  padding: 5rem 0 2.4rem 0;
-  max-width: 100%;
-  margin-top: auto;
-}
-
-#announce {
-  background-color: rgb(223, 231, 240);
-  display: flex;
-  justify-content: center;
-  justify-content: space-evenly;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.2rem;
-  padding: 2rem 0 3rem 0;
-  margin-top: auto;
-  margin-bottom: auto;
-  max-width: 100%;
+  padding: 4rem 0 0rem 0;
 }
 
 #rock {
@@ -120,4 +112,11 @@ header {
 
 #scissor:focus {
   outline-width: 0;
+}
+
+#announce {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  padding-top: 2rem;
 }

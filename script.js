@@ -31,7 +31,8 @@
     const compScore = document.getElementById("compScore");
     computerScore += 1;
     compScore.innerText = computerScore;
-    sayComp.innerText = `Computer wins!\nTie: ${tie}`;
+    sayComp.innerText += "Computer wins!";
+    if (playerScore === 5 || computerScore === 5) return gameOver();
     return;
   }
 
@@ -40,42 +41,42 @@
     const userScore = document.getElementById("userScore");
     playerScore += 1;
     userScore.innerText = playerScore;
-    sayPlayer.innerText = `You win!\nTie: ${tie}`;
+    sayPlayer.innerText += "You win!";
+    if (playerScore === 5 || computerScore === 5) return gameOver();
     return;
   }
 
   function setTie() {
     const sayTie = document.getElementById("announce");
+    const tieScore = document.getElementById("tieScore");
     tie += 1;
-    sayTie.innerText = `It's a tie.\nTie: ${tie}`;
+    tieScore.innerText = tie;
+    sayTie.innerText = "It's a tie.";
     return;
   }
 
   function gameOver() {
     const endGame = document.getElementById("announce");
-    endGame.innerText = `Game Over!\nTie: ${tie}`;
+    endGame.innerText += "\nGame Over.";
     rock.removeEventListener("click", rockChoice);
     paper.removeEventListener("click", paperChoice);
     scissor.removeEventListener("click", scissorChoice);
     return;
   }
 
-  let games = 0;
   function playGame(playerSelection, computerSelection) {
-    if (games === 3) return gameOver();
-
+    const compChoice = document.getElementById("announce");
     if (
       (playerSelection === "scissor" && computerSelection === "rock") ||
       (playerSelection === "paper" && computerSelection === "scissor") ||
       (playerSelection === "rock" && computerSelection === "paper")
     ) {
-      ++games;
+      compChoice.innerText = `Your opponent chose ${computerSelection}.\n`;
       return compWon();
     } else if (playerSelection == computerSelection) {
-      --games;
       return setTie();
     } else {
-      ++games;
+      compChoice.innerText = `Your opponent chose ${computerSelection}.\n`;
       return playerWon();
     }
   }
